@@ -31,12 +31,33 @@
     <%= form.text_field :email %>
   </div>
 
-  <div>
-    <%= form.label :cep, style: "display: block" %>
-    <%= form.text_field :cep %>
-  </div>
+  <%= fields_for :endereco do |u| %>
+    <div>
+      <%= u.label :cep, style: "display: block" %>
+      <%= u.number_field :cep %>
+    </div>
 
-  <div>
+    <div>
+      <%= u.label :cidade, style: "display: block" %>
+      <%= u.text_field :cidade %>
+    </div>
+
+    <div>
+      <%= u.label :bairro, style: "display: block" %>
+      <%= u.text_field :bairro %>
+    </div>
+
+    <div>
+      <%= u.label :logradouro, style: "display: block" %>
+      <%= u.text_field :logradouro %>
+    </div>
+
+    <div>
+      <%= u.label :complemento, style: "display: block" %>
+      <%= u.text_field :complemento %>
+    </div>
+  <% end %>
+  <div class="actions">
     <%= form.submit %>
   </div>
 <% end %>

@@ -13,18 +13,23 @@ class PacientesController < ApplicationController
   # GET /pacientes/new
   def new
     @paciente = Paciente.new
+    @endereco = Endereco.new
   end
 
   # GET /pacientes/1/edit
   def edit
+
   end
 
   # POST /pacientes or /pacientes.json
   def create
-    @paciente = Paciente.new(paciente_params)
 
+    @paciente = Paciente.new(paciente_params)
+    @endereco = Endereco.new(endereco_params)
     respond_to do |format|
       if @paciente.save
+        @endereco.paciente_id = @paciente.id
+        @endereco.save
         format.html { redirect_to paciente_url(@paciente), notice: "Paciente was successfully created." }
         format.json { render :show, status: :created, location: @paciente }
       else
@@ -38,6 +43,7 @@ class PacientesController < ApplicationController
   def update
     respond_to do |format|
       if @paciente.update(paciente_params)
+        @endereco.update(endereco_params)
         format.html { redirect_to paciente_url(@paciente), notice: "Paciente was successfully updated." }
         format.json { render :show, status: :ok, location: @paciente }
       else
@@ -61,10 +67,15 @@ class PacientesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_paciente
       @paciente = Paciente.find(params[:id])
+      @endereco = Endereco.find_by_paciente_id(@paciente.id)
     end
 
     # Only allow a list of trusted parameters through.
     def paciente_params
-      params.require(:paciente).permit(:nome_completo, :data_nascimento, :cpf, :email)
+      params.require(:paciente).permit(:nome_completo, :data_nascimento, :cpf, :email, endereco_attributes: [:id, :cep, :cidade, :bairro, :logradouro, :complemento, :paciente_id])
+    end
+
+    def endereco_params
+      params.require(:endereco).permit(:cep, :cidade, :bairro, :logradouro, :complemento, :paciente_id)
     end
 end
