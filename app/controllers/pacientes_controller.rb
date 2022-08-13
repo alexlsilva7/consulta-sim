@@ -27,28 +27,52 @@ class PacientesController < ApplicationController
     @paciente = Paciente.new(paciente_params)
     @endereco = Endereco.new(endereco_params)
     respond_to do |format|
-      if @paciente.save
+      if @paciente.valid?
+        @paciente.save
         @endereco.paciente_id = @paciente.id
-        @endereco.save
-        format.html { redirect_to paciente_url(@paciente), notice: "Paciente was successfully created." }
-        format.json { render :show, status: :created, location: @paciente }
+        if @endereco.valid?
+          @endereco.save
+          format.html { redirect_to paciente_url(@paciente), notice: "Paciente was successfully created." }
+          format.json { render :show, status: :created, location: @paciente }
+        else
+          @paciente.destroy
+          format.html { render :new, status: :unprocessable_entity }
+          format.json { render json: @paciente.errors, status: :unprocessable_entity }
+          format.json { render json: @endereco.errors, status: :unprocessable_entity }
+        end
       else
+        @paciente.save
+        @endereco.paciente_id = @paciente.id
+        @endereco.valid?
+
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @paciente.errors, status: :unprocessable_entity }
+        format.json { render json: @endereco.errors, status: :unprocessable_entity }
+        @paciente.destroy
       end
     end
+
   end
 
   # PATCH/PUT /pacientes/1 or /pacientes/1.json
   def update
     respond_to do |format|
-      if @paciente.update(paciente_params)
-        @endereco.update(endereco_params)
-        format.html { redirect_to paciente_url(@paciente), notice: "Paciente was successfully updated." }
-        format.json { render :show, status: :ok, location: @paciente }
+      if @paciente.valid?
+        @paciente.update(paciente_params)
+        if @endereco.valid?
+          @endereco.update(endereco_params)
+          format.html { redirect_to paciente_url(@paciente), notice: "Paciente was successfully created." }
+          format.json { render :show, status: :created, location: @paciente }
+        else
+          format.html { render :new, status: :unprocessable_entity }
+          format.json { render json: @paciente.errors, status: :unprocessable_entity }
+          format.json { render json: @endereco.errors, status: :unprocessable_entity }
+        end
       else
-        format.html { render :edit, status: :unprocessable_entity }
+        @endereco.valid?
+        format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @paciente.errors, status: :unprocessable_entity }
+        format.json { render json: @endereco.errors, status: :unprocessable_entity }
       end
     end
   end
