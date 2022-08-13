@@ -1,14 +1,40 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>Medicos</h1>
-
-<div id="medicos">
-  <% @medicos.each do |medico| %>
-    <%= render medico %>
-    <p>
-      <%= link_to "Show this medico", medico %>
-    </p>
-  <% end %>
+<div class="container-fluid text-center mb-3">
+  <h2>Medicos</h2>
+  <%= link_to "Novo Medico", new_medico_path, class: "btn btn-primary" %>
 </div>
 
-<%= link_to "New medico", new_medico_path %>
+<div class="container text-center">
+  <table class="table table-striped">
+    <thead class="thead-light">
+    <tr>
+      <th scope="col">id</th>
+      <th scope="col">Nome Completo</th>
+      <th scope="col">CPF</th>
+      <th scope="col">Email</th>
+      <th scope="col">CRM</th>
+      <th scope="col">Ações</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    <% @medicos.each do |medico| %>
+      <tr>
+        <th scope="row"><%= medico.id %></th>
+        <td><%= medico.nome_completo %></td>
+        <td><%= medico.cpf %></td>
+        <td><%= medico.email %></td>
+        <td><%= medico.crm %></td>
+        <td><p>
+          <%= link_to "Exibir", medico , class: "btn btn-primary" %>
+        </p></td>
+      </tr>
+
+    <% end %>
+
+    </tbody>
+  </table>
+</div>
+
+
