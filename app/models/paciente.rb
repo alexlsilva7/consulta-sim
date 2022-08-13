@@ -8,7 +8,7 @@ class Paciente < ApplicationRecord
   validates :cpf, length: { is: 11}
 
   validates :nome_completo, length: { minimum: 5}
-  validates :nome_completo, format: { with: /\A[a-zA-Z]+\z/,message: "only allows letters" }
+  validates :nome_completo, length: { maximum: 30}
 
   validates :email, uniqueness: true
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
