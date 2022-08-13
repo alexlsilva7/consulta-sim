@@ -2,12 +2,14 @@
 
 one:
   nome_completo: MyString
-  data_nascimento: 2022-08-13
   cpf: 1
   email: MyString
+  especialidade: MyString
+  crm: MyString
 
 two:
   nome_completo: MyString
-  data_nascimento: 2022-08-13
   cpf: 1
   email: MyString
+  especialidade: MyString
+  crm: MyString
