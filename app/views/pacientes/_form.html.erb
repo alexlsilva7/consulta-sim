@@ -1,6 +1,6 @@
 <%= form_with(model: paciente) do |form| %>
   <% if paciente.errors.any? || @endereco.errors.any?%>
-    <div style="color: red">
+    <div class="container col-6 bg-danger text-white p-3 rounded" >
       <h2><%= pluralize(paciente.errors.count + @endereco.errors.count, "error") %> prohibited this paciente from being saved:</h2>
 
       <ul>
