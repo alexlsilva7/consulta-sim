@@ -14,15 +14,19 @@ class Paciente < ApplicationRecord
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
 
   validates_each :data_nascimento do |record, attr, value|
-    record.errors.add attr, 'does not meet Terms of Service requirements
-    (over 18)' if value > (18.years.ago).to_date
+    if !value.nil?
+      record.errors.add attr, 'does not meet Terms of Service requirements (over 18)' if value > (18.years.ago).to_date
+    end
   end
   validate :data_nascimento_future
 
   def data_nascimento_future
-    if  data_nascimento > Date.today
-      errors.add(:data_nascimento, "can't be in the future")
+    if !data_nascimento.nil?
+      if  data_nascimento > Date.today
+        errors.add(:data_nascimento, "can't be in the future")
+      end
     end
+
   end
 
 end
