@@ -13,6 +13,7 @@ class ConsultaController < ApplicationController
   # GET /consulta/new
   def new
     @consultum = Consultum.new
+    @paciente = Paciente.find(params[:paciente_id])
   end
 
   # GET /consulta/1/edit
@@ -21,17 +22,19 @@ class ConsultaController < ApplicationController
 
   # POST /consulta or /consulta.json
   def create
-    @consultum = Consultum.new(consultum_params)
+    @paciente = Paciente.find(params[:paciente_id])
+    @consultum = @paciente.consultums.create(consultum_params)
+    redirect_to paciente_path(@paciente)
 
-    respond_to do |format|
-      if @consultum.save
-        format.html { redirect_to consultum_url(@consultum), notice: "Consultum was successfully created." }
-        format.json { render :show, status: :created, location: @consultum }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @consultum.errors, status: :unprocessable_entity }
-      end
-    end
+    # respond_to do |format|
+    #   if @consultum.save
+    #     format.html { redirect_to consultum_url(@consultum), notice: "Consultum was successfully created." }
+    #     format.json { render :show, status: :created, location: @consultum }
+    #   else
+    #     format.html { render :new, status: :unprocessable_entity }
+    #     format.json { render json: @consultum.errors, status: :unprocessable_entity }
+    #   end
+    # end
   end
 
   # PATCH/PUT /consulta/1 or /consulta/1.json

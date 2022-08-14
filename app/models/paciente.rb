@@ -1,6 +1,6 @@
 class Paciente < ApplicationRecord
-  has_one :endereco,dependent: :destroy
-  has_many :consultums,dependent: :destroy
+  has_one :endereco,:dependent => :destroy
+  has_many :consultums,:dependent => :destroy
   accepts_nested_attributes_for :endereco
 
   validates :cpf , :email , :data_nascimento, :nome_completo, presence: true

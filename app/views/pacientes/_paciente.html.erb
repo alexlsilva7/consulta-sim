@@ -1,52 +1,63 @@
-<div id="<%= dom_id paciente %>">
-  <p>
-    <strong>Nome completo:</strong>
-    <%= paciente.nome_completo %>
-  </p>
+<div class="row">
 
-  <p>
-    <strong>Data nascimento:</strong>
-    <%= paciente.data_nascimento %>
-  </p>
-
-  <p>
-    <strong>Cpf:</strong>
-    <%= paciente.cpf %>
-  </p>
-
-  <p>
-    <strong>Email:</strong>
-    <%= paciente.email %>
-  </p>
-
-</div>
-<% unless paciente.endereco.nil? %>
-  <div id="<%= dom_id paciente.endereco %>">
-    <p>
-      <strong>Cep:</strong>
-      <%= paciente.endereco.cep %>
-    </p>
-
-    <p>
-      <strong>Cidade:</strong>
-      <%= paciente.endereco.cidade %>
-    </p>
-
-    <p>
-      <strong>Bairro:</strong>
-      <%= paciente.endereco.bairro %>
-    </p>
-
-    <p>
-      <strong>Logradouro:</strong>
-      <%= paciente.endereco.logradouro %>
-    </p>
-
-    <p>
-      <strong>Complemento:</strong>
-      <%= paciente.endereco.complemento %>
-    </p>
-
+  <div id="<%= dom_id paciente %>" class="col-5 container">
+    <h5 class="text-center">Paciente</h5>
+    <ul class="list-group">
+      <li class="list-group-item"> <strong>Nome completo:</strong>
+        <%= paciente.nome_completo %></li>
+      <li class="list-group-item"><strong>Data nascimento:</strong>
+        <%= paciente.data_nascimento %></li>
+      <li class="list-group-item"><strong>Cpf:</strong>
+        <%= paciente.cpf %></li>
+      <li class="list-group-item"><strong>Email:</strong>
+        <%= paciente.email %></li>
+      <% unless paciente.endereco.nil? %>
+        <li class="list-group-item"> <strong>Cep:</strong>
+          <%= paciente.endereco.cep %></li>
+        <li class="list-group-item">  <strong>Cidade:</strong>
+          <%= paciente.endereco.cidade %> </li>
+        <li class="list-group-item"><strong>Bairro:</strong>
+          <%= paciente.endereco.bairro %> </li>
+        <li class="list-group-item"><strong>Logradouro:</strong>
+          <%= paciente.endereco.logradouro %> </li>
+        <li class="list-group-item"> <strong>Complemento:</strong>
+          <%= paciente.endereco.complemento %></li>
+      <% end %>
+    </ul>
   </div>
-<% end %>
+  
+  <div class="col-6">
+    <h5 class="text-center">Consultas</h5>
+    <div class="container text-center">
+      <table class="table table-striped">
+        <thead class="thead-light">
+        <tr>
+          <th scope="col">id</th>
+          <th scope="col">Data</th>
+          <th scope="col">Horario</th>
+          <th scope="col">Medico</th>
+          <th scope="col">Ações</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <% @consultas.each do |consulta| %>
+          <tr>
+            <th scope="row"><%= consulta.id %></th>
+            <td><%= consulta.data %></td>
+            <td><%= consulta.horario %></td>
+            <td><%= consulta.medico.nome_completo %></td>
+
+            <td><p>
+              <%= link_to "Exibir", paciente , class: "btn btn-primary" %>
+            </p></td>
+          </tr>
+
+        <% end %>
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
 

@@ -1,5 +1,5 @@
 class PacientesController < ApplicationController
-  before_action :set_paciente, only: %i[ show edit update destroy ]
+  before_action :set_paciente, only: %i[ show edit update destroy  ]
 
   # GET /pacientes or /pacientes.json
   def index
@@ -8,6 +8,30 @@ class PacientesController < ApplicationController
 
   # GET /pacientes/1 or /pacientes/1.json
   def show
+    @consultas = @paciente.consultums
+  end
+
+  def newConsulta
+    @paciente = Paciente.find(params[:id])
+    @consultum = Consultum.new
+  end
+
+  def createConsulta
+
+    @consultum = Consultum.new(consulta_params)
+
+    respond_to do |format|
+      if @consultum.valid?
+        @consultum.paciente_id = @paciente.id
+        @consultum.save
+          format.html { redirect_to paciente_url(@paciente), notice: "Consulta criada was successfully created." }
+          format.json { render :show, status: :created, location: @paciente }
+        else
+          format.html { render :new, status: :unprocessable_entity }
+          format.json { render json: @consultum.errors, status: :unprocessable_entity }
+        end
+
+    end
   end
 
   # GET /pacientes/new
@@ -101,5 +125,9 @@ class PacientesController < ApplicationController
 
     def endereco_params
       params.require(:endereco).permit(:cep, :cidade, :bairro, :logradouro, :complemento, :paciente_id)
+    end
+
+    def consulta_params
+      params.require(:consultum).permit(:data, :horario, :medico_id)
     end
 end
