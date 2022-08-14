@@ -186,6 +186,7 @@ GEM
       railties (>= 6.0.0)
     strscan (3.0.4)
     thor (1.2.1)
+    timeliness (0.4.4)
     timeout (0.3.0)
     turbo-rails (1.1.1)
       actionpack (>= 6.0.0)
@@ -195,6 +196,8 @@ GEM
       concurrent-ruby (~> 1.0)
     tzinfo-data (1.2022.2)
       tzinfo (>= 1.0.0)
+    validates_timeliness (5.0.0)
+      timeliness (>= 0.3.10, < 1)
     web-console (4.2.0)
       actionview (>= 6.0.0)
       activemodel (>= 6.0.0)
@@ -229,6 +232,7 @@ DEPENDENCIES
   stimulus-rails
   turbo-rails
   tzinfo-data
+  validates_timeliness
   web-console
   webdrivers
 

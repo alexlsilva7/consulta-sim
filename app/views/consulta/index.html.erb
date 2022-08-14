@@ -6,7 +6,7 @@
   <% @consulta.each do |consultum| %>
     <%= render consultum %>
     <p>
-      <%= link_to "Show this consultum", consultum %>
+      <%= link_to "Show this consultum", paciente_consultum_url(consultum) %>
     </p>
   <% end %>
 </div>

@@ -8,7 +8,7 @@ class PacientesController < ApplicationController
 
   # GET /pacientes/1 or /pacientes/1.json
   def show
-    @consultas = @paciente.consultums
+    @consultums = Consultum.all.where(:paciente_id => params[:id])
   end
 
   def newConsulta
@@ -42,7 +42,9 @@ class PacientesController < ApplicationController
 
   # GET /pacientes/1/edit
   def edit
-
+    if @endereco.nil?
+      @endereco = Endereco.new
+    end
   end
 
   # POST /pacientes or /pacientes.json
@@ -81,6 +83,7 @@ class PacientesController < ApplicationController
   # PATCH/PUT /pacientes/1 or /pacientes/1.json
   def update
     respond_to do |format|
+      @paciente.attributes = paciente_params
       if @paciente.valid?
         @paciente.update(paciente_params)
         if @endereco.valid?

@@ -36,21 +36,19 @@
           <th scope="col">Data</th>
           <th scope="col">Horario</th>
           <th scope="col">Medico</th>
-          <th scope="col">Ações</th>
+
         </tr>
         </thead>
         <tbody>
 
-        <% @consultas.each do |consulta| %>
+        <% @consultums.each do |consulta| %>
           <tr>
             <th scope="row"><%= consulta.id %></th>
             <td><%= consulta.data %></td>
             <td><%= consulta.horario %></td>
             <td><%= consulta.medico.nome_completo %></td>
 
-            <td><p>
-              <%= link_to "Exibir", paciente , class: "btn btn-primary" %>
-            </p></td>
+
           </tr>
 
         <% end %>

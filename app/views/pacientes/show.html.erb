@@ -1,9 +1,27 @@
 <p style="color: green"><%= notice %></p>
 
 <%= render @paciente %>
+<%#= render @paciente.consultums %>
+<div class="container col-8 text-center justify-content-center">
+  <ul class="nav nav-pills nav-fill">
+    <li class="nav-item">
+      <%= link_to "Editar paciente", edit_paciente_path(@paciente) , class: "btn btn-primary m-2 nav-link"%>
+    </li>
+    <li class="nav-item">
+      <%= link_to "Voltar", pacientes_path , class: "btn btn-primary m-2 nav-link"%>
+    </li>
+    <li class="nav-item">
+      <%= button_to "Excluir paciente", @paciente, method: :delete , class: "btn btn-primary m-2 nav-link"%>
+    </li>
+    <li class="nav-item">
+      <%= link_to "Marcar Consulta", "/pacientes/#{@paciente.id}/nova-consulta", class: "btn btn-success my-2 nav-link"%>
+    </li>
+  </ul>
 
-<div>
-  <%= link_to "Edit this paciente", edit_paciente_path(@paciente) %> |
-  <%= link_to "Back to pacientes", pacientes_path %>
-  <%= button_to "Destroy this paciente", @paciente, method: :delete %>
+
+
+
+
+
+
 </div>

@@ -23,5 +23,38 @@
     <strong>Crm:</strong>
     <%= medico.crm %>
   </p>
+  <h4>Consultas</h4>
+  <div class="col-6">
+    <h5 class="text-center">Consultas</h5>
+    <div class="container text-center">
+      <table class="table table-striped">
+        <thead class="thead-light">
+        <tr>
+          <th scope="col">id</th>
+          <th scope="col">Data</th>
+          <th scope="col">Horario</th>
+          <th scope="col">Paciente</th>
 
+        </tr>
+        </thead>
+        <tbody>
+
+        <% @consultums.each do |consulta| %>
+          <tr>
+            <th scope="row"><%= consulta.id %></th>
+            <td><%= consulta.data %></td>
+            <td><%= consulta.horario %></td>
+            <td><%= consulta.paciente.nome_completo %></td>
+
+
+          </tr>
+
+        <% end %>
+
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>
+
+
