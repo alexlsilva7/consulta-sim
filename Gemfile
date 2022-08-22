@@ -45,6 +45,8 @@ gem "bootsnap", require: false
 
 gem "validates_timeliness"
 
+gem "ffi"
+
 # Use Sass to process CSS
 # gem "sassc-rails"
 
