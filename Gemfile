@@ -47,6 +47,8 @@ gem "validates_timeliness"
 
 gem "ffi"
 
+
+
 # Use Sass to process CSS
 # gem "sassc-rails"
 
@@ -74,4 +76,7 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
   gem "webdrivers"
+
+  gem 'cucumber-rails', require: false
+  gem 'database_cleaner'
 end
