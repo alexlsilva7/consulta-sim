@@ -3,7 +3,7 @@
 <%= render @medico %>
 
 <div>
-  <%= link_to "Edit this medico", edit_medico_path(@medico) %> |
+  <%= link_to "Edit", edit_medico_path(@medico),class: "btn btn-primary m-2"%> |
   <%= link_to "Back to medicos", medicos_path %>
 
   <%= button_to "Destroy this medico", @medico, method: :delete %>

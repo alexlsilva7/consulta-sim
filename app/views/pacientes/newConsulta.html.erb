@@ -21,7 +21,7 @@
 
     <div>
       <%= form.label :medico_id, style: "display: block" %>
-      <%= form.text_field :medico_id , class:"form-control"%>
+      <%= form.collection_select(:medico_id, Medico.all, :id, :nome_completo,{:selected => @consultum.medico_id},class:"form-control")%>
     </div>
 
     <div class="actions">
