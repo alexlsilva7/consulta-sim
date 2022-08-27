@@ -29,3 +29,6 @@ Then('eu vejo uma mensagem que informa que o medico foi atualizado com sucesso')
   page.has_content?('Medico was successfully updated.')
   end
 
+Then('eu vejo uma mensagem que o email e invalido') do
+  page.has_content?('Email is invalid.')
+end
