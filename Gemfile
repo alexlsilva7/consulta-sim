@@ -47,6 +47,7 @@ gem "validates_timeliness"
 
 gem "ffi"
 
+gem "devise"
 
 
 # Use Sass to process CSS
